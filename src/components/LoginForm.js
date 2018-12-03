@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native'; 
-import * as firebase from 'firebase';
+import * as firebase from 'firebase'
 import { Button, Card, CardSection, Input, Spinner } from './common';
 
 class LoginForm extends Component {
@@ -18,14 +18,12 @@ class LoginForm extends Component {
         //Trying to create a new account
         firebase.auth().createUserWithEmailAndPassword(email, password)
           .then(this.onLoginSuccess)
-          .catch((error) => {
-            console.log(error)
-            this.setState({ error: 'Authentication Failed.' });
-          });
+          .catch(this.onLoginFail);
       });
   }
 
   onLoginFail = () => {
+    console.log("falhou")
     this.setState({ error: 'Auhentication Failed', loading: false })
   }
 
@@ -34,6 +32,7 @@ class LoginForm extends Component {
    //Clear out any error messages that are on the screen
    // Setting loading to false
    //Clean the form
+   console.log("logou/criou");
    this.setState({
     email: '',
     password: '',
